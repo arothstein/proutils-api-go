@@ -1,8 +1,8 @@
-// proutils-api/arin/arin.go
+// proutils-api/whois/whois.go
 //
-// Logic for getting ARIN information.
+// Logic for getting WHOIS information.
 
-package arin
+package whois
 
 import (
 	"io/ioutil"
@@ -11,7 +11,7 @@ import (
 	xj "github.com/basgys/goxml2json"
 )
 
-// GetNetwork takes an IP input and queries ARIN API to return Network info
+// GetNetwork takes an IP input and queries ARIN API to return WHOIS Network info
 func GetNetwork(ip string) []byte {
 	resp, err := http.Get("http://whois.arin.net/rest/ip/" + ip)
 	if err != nil {
