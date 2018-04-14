@@ -29,7 +29,7 @@ func main() {
 
 	// Setup middlewares.
 	// - Add CORS to restrict request origins.
-	origins := []string{"https://proutils.com", "https://www.proutils.com", "http://localhost", "http://localhost:8080"}
+	origins := []string{"https://proutils.com", "https://www.proutils.com", "https://www-staging.proutils.com", "http://localhost", "http://localhost:8080"}
 	c := cors.New(cors.Options{
 		AllowedOrigins: origins,
 	})
