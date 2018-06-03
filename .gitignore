@@ -12,3 +12,6 @@
 
 # Project-local glide cache, RE: https://github.com/Masterminds/glide/issues/736
 .glide/
+
+# https://github.com/kardianos/govendor/blob/master/doc/faq.md#q-how-do-i-prevent-vendor-source-from-being-checked-in
+vendor/*/
