@@ -36,7 +36,7 @@ func HandlePwGen(w http.ResponseWriter, r *http.Request, params httprouter.Param
 	}
 
 	// variable to hold the generated passwords
-	pwSet := make([]string, 1)
+	pwSet := make([]string, 0)
 
 	for i := 0; i < req.PwCount; i++ {
 		pw, err := NewPassword(req.WordCount, req.AddInt, req.AddSpecial)
