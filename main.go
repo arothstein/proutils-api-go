@@ -10,6 +10,7 @@ import (
 	"os"
 
 	"github.com/arothstein/proutils-api/publicip"
+	"github.com/arothstein/proutils-api/pwgen"
 	"github.com/arothstein/proutils-api/whois"
 	"github.com/julienschmidt/httprouter"
 	"github.com/rs/cors"
@@ -21,6 +22,7 @@ func main() {
 	// Setup all routes.
 	router := httprouter.New()
 	router.GET("/whois/:ip", whois.HandleWHOISIP)
+	router.POST("/password-generator", pwgen.HandlePwGen)
 	router.GET("/public-ip", publicip.HandlePublicIP)
 
 	// Setup 404 / 405 handlers.
