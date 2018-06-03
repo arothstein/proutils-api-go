@@ -8,6 +8,7 @@ import (
 	"crypto/rand"
 	"math"
 	"math/big"
+	"unicode"
 )
 
 var (
@@ -18,6 +19,55 @@ var (
 	// sides is the number of sides on a die
 	sides = big.NewInt(6)
 )
+
+// one-liner for standard error handling
+func handleError(err error) {
+	if err != nil {
+		panic(err)
+	}
+}
+
+// NewPassword takes the number of words and other flags to return single string password
+func NewPassword(words int, addInt bool, addSpecial bool) (string, error) {
+	var pw string
+
+	// Get list of random words
+	wordList, err := Generate(words)
+	handleError(err)
+
+	// Capitalize the first letter of each word
+	for _, word := range wordList {
+		// TODO: Look at using byte slice with copy for better performance
+		pw += upperFirst(word)
+	}
+
+	// If requested, append a number to the end
+	if addInt {
+		i, err := rand.Int(rand.Reader, big.NewInt(9))
+		handleError(err)
+		pw += i.String()
+	}
+
+	// If requested, append a special character to the end
+	if addSpecial {
+		specials := "~=+%^*/()[]{}/!@#$?|" // 20 characters
+		i, err := rand.Int(rand.Reader, big.NewInt(19))
+		if err != nil {
+			return "", err
+		}
+		pw += string(specials[i.Int64()])
+	}
+
+	return pw, nil
+}
+
+// upperFirst takes a string and returns it with the first letter capitalized
+func upperFirst(str string) string {
+	for i, v := range str {
+		return string(unicode.ToUpper(v)) + str[i+1:]
+	}
+	return ""
+}
 
 // Generate generates a list of the given number of words.
 func Generate(words int) ([]string, error) {
