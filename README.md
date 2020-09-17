@@ -1,1 +1,1 @@
-# proutils-api
+# proutils-api-go
